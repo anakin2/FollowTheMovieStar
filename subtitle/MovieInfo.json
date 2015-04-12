@@ -4,19 +4,19 @@
 			"filename":"The.God.of.Cookery",
 			"movieName":"食神",
 			"url":"http://vultr.dm4.tw/mp4/god.mp4",
-			"offset":"-40"
+			"offset":-40
 		},
 		{
 			"filename":"Flirting.Schola",
 			"movieName":"唐伯虎點秋香",
 			"url":"http://vultr.dm4.tw/mp4/tang.mp4",
-			"offset":"0"
+			"offset":0
 		},
 		{
 			"filename":"Hail.The.Judge",
 			"movieName":"九品芝麻官",
 			"url":"http://vultr.dm4.tw/mp4/nine.mp4",
-			"offset":"0"
+			"offset":1.2
 		}
 		
 	]
