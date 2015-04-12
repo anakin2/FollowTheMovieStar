@@ -3,6 +3,7 @@ package tw.ggmlab.followthemoviestar;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +20,8 @@ import java.util.HashMap;
 
 
 public class ResultActivity extends ActionBarActivity {
+
+    private final static int playPeriod = 10 * 1000;
 
     private String timeStart;
     private String timeEnd;
@@ -52,6 +55,13 @@ public class ResultActivity extends ActionBarActivity {
                             "error start time !", Toast.LENGTH_SHORT).show();
                 } else {
                     mp.seekTo(playStartMecs);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            videoView.stopPlayback();
+                        }
+                    }, playPeriod);
                 }
             }
         });
