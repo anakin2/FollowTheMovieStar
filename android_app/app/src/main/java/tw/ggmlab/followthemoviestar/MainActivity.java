@@ -41,11 +41,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "xE663KkYxrGlPhGiOurXseiFUZajrTM7CjFS3XFb",
-                "zHAJv2fCp3o0iya9YKJBYPFKQKrC4KYUC9OwZckr");
-
         progress = new ProgressDialog(this);
 
         button = (Button) findViewById(R.id.searchButton);
@@ -97,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
         progress.setTitle("Loading... ");
         progress.show();
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TestClass");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("SubtitleData");
         query.whereContains("subtitle", text);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -119,13 +114,23 @@ public class MainActivity extends ActionBarActivity {
         List<Map<String, String>> data = new ArrayList<>();
 
         for (int i = 0; i < parseObjects.size(); i++){
+            ParseObject object = parseObjects.get(i);
+
             HashMap<String, String> item = new HashMap<>();
-            item.put("movieName", parseObjects.get(i).getString("movie"));
-            item.put("subtitle", parseObjects.get(i).getString("subtitle"));
+            item.put("text1", object.getString("subtitle"));
+            item.put("text2", object.getString("movie") + ":" +
+                    object.getString("timeStart") + "~" +
+                    object.getString("timeEnd"));
+
+            item.put("subtitle", object.getString("subtitle"));
+            item.put("movieName", object.getString("movie"));
+            item.put("timeStart", object.getString("timeStart"));
+            item.put("timeEnd", object.getString("timeEnd"));
+
             data.add(item);
         }
 
-        String[] from = {"movieName", "subtitle"};
+        String[] from = {"text1", "text2"};
         int[] to = {android.R.id.text1, android.R.id.text2};
         SimpleAdapter adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2, from, to);
 

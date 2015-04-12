@@ -1,5 +1,6 @@
 package tw.ggmlab.followthemoviestar;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -14,10 +15,16 @@ import android.widget.VideoView;
 public class ResultActivity extends ActionBarActivity {
 
     private VideoView videoView;
+
+    // mesec
+    private int playStart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        playStart = getPlayStart();
 
         videoView = (VideoView) findViewById(R.id.videoView);
 //        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/hitcon.mp4"));
@@ -27,9 +34,24 @@ public class ResultActivity extends ActionBarActivity {
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.seekTo(5000);
+
+                //mock data or error
+                if (playStart == -1) {
+                    mp.seekTo(1500);
+                } else {
+                    mp.seekTo(playStart);
+                }
+
             }
         });
+        videoView.start();
+
+    }
+
+    private int getPlayStart() {
+        Intent intent = getIntent();
+        if (intent == null) return -1;
+        return intent.getIntExtra("playStart", -1);
     }
 
 
