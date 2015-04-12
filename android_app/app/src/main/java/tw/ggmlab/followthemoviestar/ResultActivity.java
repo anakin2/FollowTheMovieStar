@@ -1,5 +1,6 @@
 package tw.ggmlab.followthemoviestar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -8,8 +9,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -21,7 +24,9 @@ import java.util.HashMap;
 
 public class ResultActivity extends ActionBarActivity {
 
-    private final static int playPeriod = 10 * 1000;
+    private final static int playPeriod = 7 * 1000;
+    private final static int playBuffer = 1 * 1000;
+
 
     private String timeStart;
     private String timeEnd;
@@ -31,12 +36,18 @@ public class ResultActivity extends ActionBarActivity {
     private VideoView videoView;
     private ParseObject movieInfo;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
         init();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.show();
 
         textView = (TextView) findViewById(R.id.subtitle);
         textView.setText(subtitle);
@@ -47,6 +58,8 @@ public class ResultActivity extends ActionBarActivity {
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+
+                progressDialog.dismiss();
 
                 int playStartMecs = getPlayStartMecs();
 
@@ -59,7 +72,8 @@ public class ResultActivity extends ActionBarActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            videoView.stopPlayback();
+                            videoView.pause();
+                            Utils.createDialog(ResultActivity.this, videoView).show();
                         }
                     }, playPeriod);
                 }
@@ -87,7 +101,7 @@ public class ResultActivity extends ActionBarActivity {
 
     private int getPlayStartMecs() {
         return Utils.convertTimeString(timeStart) +
-                ((int) movieInfo.getDouble("offset") * 1000);
+                ((int) movieInfo.getDouble("offset") * 1000) - playBuffer;
     }
 
     @Override

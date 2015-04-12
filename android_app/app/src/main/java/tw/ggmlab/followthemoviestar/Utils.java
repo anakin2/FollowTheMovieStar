@@ -1,6 +1,11 @@
 package tw.ggmlab.followthemoviestar;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.VideoView;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -57,5 +62,26 @@ public class Utils {
         }
 
         return _movieInfo.get(filename);
+    }
+
+    public static Dialog createDialog(Activity activity, final VideoView videoView) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage("想看更多？")
+                .setPositiveButton("前往購買", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                })
+                .setNegativeButton("繼續播放", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        int position = videoView.getCurrentPosition();
+                        videoView.seekTo(position);
+                        videoView.start();
+                    }
+                });
+        // Create the AlertDialog object and return it
+        return builder.create();
+
     }
 }
