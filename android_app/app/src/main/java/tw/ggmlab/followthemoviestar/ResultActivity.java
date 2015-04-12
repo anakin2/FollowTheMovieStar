@@ -1,25 +1,35 @@
 package tw.ggmlab.followthemoviestar;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.VideoView;
 
 
 public class ResultActivity extends ActionBarActivity {
 
-    private WebView webView;
-
+    private VideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        webView = (WebView) findViewById(R.id.webView);
-        webView.loadUrl("http://vultr.dm4.tw/");
-        webView.setWebChromeClient(new WebChromeClient());
+        videoView = (VideoView) findViewById(R.id.videoView);
+//        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/hitcon.mp4"));
+        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/nine.mp4"));
+
+//        videoView.start();
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.seekTo(5000);
+            }
+        });
     }
 
 

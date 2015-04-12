@@ -7,10 +7,10 @@
     android:orientation="vertical"
     tools:context="tw.ggmlab.followthemoviestar.ResultActivity">
 
-    <WebView
+    <VideoView
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:id="@+id/webView" />
+        android:id="@+id/videoView" />
 
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
