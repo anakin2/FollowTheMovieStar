@@ -23,7 +23,9 @@ for line in filename:
                     objlist['results'].append(obj)
                     obj = {}
                 obj['no'] = tmp
-                obj['filename'] = line.strip().strip(".srt")
+                yo = line.strip()
+                yo = yo[0:len(yo)-4]
+                obj['filename'] = yo
                 no += 1
                 idx += 1
             elif idx % 2 == 1:
