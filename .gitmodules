@@ -1,3 +1,4 @@
 [submodule "VideoEnabledWebView"]
 	path = VideoEnabledWebView
-	url = git@github.com:cprcrack/VideoEnabledWebView.git
+    url = git@github.com:cprcrack/VideoEnabledWebView.git
+    ignore = dirty
