@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -21,7 +22,9 @@ public class ResultActivity extends ActionBarActivity {
 
     private String timeStart;
     private String timeEnd;
+    private String subtitle;
 
+    private TextView textView;
     private VideoView videoView;
     private ParseObject movieInfo;
 
@@ -31,6 +34,9 @@ public class ResultActivity extends ActionBarActivity {
         setContentView(R.layout.activity_result);
 
         init();
+
+        textView = (TextView) findViewById(R.id.subtitle);
+        textView.setText(subtitle);
 
         videoView = (VideoView) findViewById(R.id.videoView);
         videoView.setVideoURI(Uri.parse(movieInfo.getString("url")));
@@ -63,6 +69,7 @@ public class ResultActivity extends ActionBarActivity {
 
         timeStart = item.get("timeStart");
         timeEnd = item.get("itemEnd");
+        subtitle = item.get("subtitle");
 
         String filename = item.get("filename");
         movieInfo = Utils.getMovieInfo(filename);
