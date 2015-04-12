@@ -2,13 +2,15 @@
 
 ![ICON](http://i.imgur.com/47LhxYx.png=100x100)
 
+## Screenshots
+
 <img src="http://i.imgur.com/bZUfOvO.png" width="200px" />
 <img src="http://i.imgur.com/OqqutVh.png" width="200px" />
 <img src="http://i.imgur.com/WdrbDpc.png" width="200px" />
 
 <img src="http://i.imgur.com/AbbqoD1.png" width="400px" />
 
-# LICENSE
+## LICENSE
 
 ```
            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
