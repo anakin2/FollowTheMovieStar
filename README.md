@@ -6,6 +6,10 @@
 
 - [Follow The Movie Star](https://play.google.com/store/apps/details?id=tw.ggmlab.followthemoviestar)
 
+## Homepage
+
+- http://godgunman.github.io/FollowTheMovieStar/
+
 ## Screenshots
 
 <img src="http://i.imgur.com/GSKsGHk.png" width="200px" />
