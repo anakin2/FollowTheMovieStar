@@ -11,6 +11,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.VideoView;
 
+import java.util.HashMap;
+
 
 public class ResultActivity extends ActionBarActivity {
 
@@ -27,23 +29,21 @@ public class ResultActivity extends ActionBarActivity {
         playStart = getPlayStart();
 
         videoView = (VideoView) findViewById(R.id.videoView);
-//        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/hitcon.mp4"));
         videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/god.mp4"));
 
 //        videoView.start();
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-
                 //mock data or error
                 if (playStart == -1) {
                     mp.seekTo(1500);
                 } else {
                     mp.seekTo(playStart);
                 }
-
             }
         });
+
         videoView.start();
 
     }
@@ -51,7 +51,13 @@ public class ResultActivity extends ActionBarActivity {
     private int getPlayStart() {
         Intent intent = getIntent();
         if (intent == null) return -1;
-        return intent.getIntExtra("playStart", -1);
+
+        Bundle bundle = intent.getExtras();
+        HashMap<String, String> item =
+                (HashMap<String, String>) bundle.getSerializable("data");
+
+        String timeStart = item.get("timeStart");
+        return Utils.convertTimeString(timeStart);
     }
 
 

@@ -61,7 +61,11 @@ public class MainActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                goToResultActivity();
+
+                HashMap<String, String> item =
+                        (HashMap<String, String>) parent.getAdapter().getItem(position);
+
+                goToResultActivity(item);
             }
         });
     }
@@ -74,9 +78,13 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    private void goToResultActivity() {
+    private void goToResultActivity(HashMap<String, String> item) {
+        Bundle extras = new Bundle();
+        extras.putSerializable("data",item);
+
         Intent intent = new Intent();
         intent.setClass(this, ResultActivity.class);
+        intent.putExtras(extras);
         startActivity(intent);
     }
 
@@ -107,19 +115,18 @@ public class MainActivity extends ActionBarActivity {
 
     public void setListViewData(List<ParseObject> parseObjects) {
 
-/*
-        String movieNames[] = new String[]{"食神", "唐伯虎點秋香"};
-        String subtitles[] = new String[]{"先生 你額有朝天骨 眼中有靈光", "我終於搶到唐伯虎的墨寶了", };
-*/
         List<Map<String, String>> data = new ArrayList<>();
 
         for (int i = 0; i < parseObjects.size(); i++){
             ParseObject object = parseObjects.get(i);
 
+            String movieName =
+                    Utils.getMovieInfo(object.getString("movie")).getString("movieName");
+
             HashMap<String, String> item = new HashMap<>();
             item.put("text1", object.getString("subtitle"));
-            item.put("text2", object.getString("movie") + ":" +
-                    object.getString("timeStart") + "~" +
+            item.put("text2", movieName + ": " +
+                    object.getString("timeStart") + " ~ " +
                     object.getString("timeEnd"));
 
             item.put("subtitle", object.getString("subtitle"));
