@@ -2,6 +2,10 @@
 
 <img src="http://i.imgur.com/47LhxYx.png=100x100" width="200px" />
 
+## Google Play
+
+- [Follow The Movie Star](https://play.google.com/store/apps/details?id=tw.ggmlab.followthemoviestar)
+
 ## Screenshots
 
 <img src="http://i.imgur.com/GSKsGHk.png" width="200px" />
