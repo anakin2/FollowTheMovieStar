@@ -125,4 +125,17 @@ public class ResultActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void finish() {
+        if (videoView != null) {
+            videoView.stopPlayback();
+        }
+        super.finish();
+    }
 }
