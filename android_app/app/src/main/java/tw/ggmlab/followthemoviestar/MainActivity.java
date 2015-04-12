@@ -49,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
         editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.d("debug", "keyCode:" + keyCode);
                 // disable break line
                 if (keyCode == KeyEvent.KEYCODE_ENTER)
                     return true;

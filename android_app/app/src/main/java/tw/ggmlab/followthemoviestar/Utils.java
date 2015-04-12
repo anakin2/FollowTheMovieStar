@@ -1,11 +1,14 @@
 package tw.ggmlab.followthemoviestar;
 
+import android.util.Log;
+
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,7 +42,14 @@ public class Utils {
             query.whereEqualTo("filename", filename);
 
             try {
-                _movieInfo.put(filename, query.find().get(0));
+                List<ParseObject> result = query.find();
+
+                if (result.size() == 0) {
+                    Log.e("Utils.java", "result size = 0. filename = " + filename);
+                    return null;
+                } else {
+                    _movieInfo.put(filename, result.get(0));
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
                 return null;
