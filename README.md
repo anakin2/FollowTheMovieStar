@@ -1,6 +1,6 @@
 # Follow The Movie Star
 
-![ICON](http://i.imgur.com/47LhxYx.png=100x100)
+<img src="http://i.imgur.com/47LhxYx.png=100x100" width="200px" />
 
 ## Screenshots
 
