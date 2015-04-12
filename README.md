@@ -4,6 +4,7 @@
 
 ## Screenshots
 
+<img src="http://i.imgur.com/GSKsGHk.png" width="200px" />
 <img src="http://i.imgur.com/bZUfOvO.png" width="200px" />
 <img src="http://i.imgur.com/OqqutVh.png" width="200px" />
 <img src="http://i.imgur.com/WdrbDpc.png" width="200px" />
