@@ -23,7 +23,7 @@ for line in filename:
                     objlist['results'].append(obj)
                     obj = {}
                 obj['no'] = tmp
-                obj['movie'] = line.strip().strip(".srt")
+                obj['filename'] = line.strip().strip(".srt")
                 no += 1
                 idx += 1
             elif idx % 2 == 1:
