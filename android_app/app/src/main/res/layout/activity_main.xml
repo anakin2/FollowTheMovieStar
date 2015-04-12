@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="搜尋"
-        android:onClick="clickSearch"/>
+        android:onClick="clickSearch"
+        android:id="@+id/searchButton"/>
 
     <ListView
         android:layout_width="match_parent"

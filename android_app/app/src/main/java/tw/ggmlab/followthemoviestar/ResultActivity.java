@@ -21,7 +21,7 @@ public class ResultActivity extends ActionBarActivity {
 
         videoView = (VideoView) findViewById(R.id.videoView);
 //        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/hitcon.mp4"));
-        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/nine.mp4"));
+        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/god.mp4"));
 
 //        videoView.start();
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
