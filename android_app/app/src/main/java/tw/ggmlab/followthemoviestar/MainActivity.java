@@ -121,7 +121,7 @@ public class MainActivity extends ActionBarActivity {
             ParseObject object = parseObjects.get(i);
 
             String movieName =
-                    Utils.getMovieInfo(object.getString("movie")).getString("movieName");
+                    Utils.getMovieInfo(object.getString("filename")).getString("movieName");
 
             HashMap<String, String> item = new HashMap<>();
             item.put("text1", object.getString("subtitle"));
@@ -130,7 +130,7 @@ public class MainActivity extends ActionBarActivity {
                     object.getString("timeEnd"));
 
             item.put("subtitle", object.getString("subtitle"));
-            item.put("movieName", object.getString("movie"));
+            item.put("filename", object.getString("filename"));
             item.put("timeStart", object.getString("timeStart"));
             item.put("timeEnd", object.getString("timeEnd"));
 

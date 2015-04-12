@@ -9,37 +9,43 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.Toast;
 import android.widget.VideoView;
+
+import com.parse.ParseObject;
 
 import java.util.HashMap;
 
 
 public class ResultActivity extends ActionBarActivity {
 
-    private VideoView videoView;
+    private String timeStart;
+    private String timeEnd;
 
-    // mesec
-    private int playStart;
+    private VideoView videoView;
+    private ParseObject movieInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        playStart = getPlayStart();
+        init();
 
         videoView = (VideoView) findViewById(R.id.videoView);
-        videoView.setVideoURI(Uri.parse("http://vultr.dm4.tw/mp4/god.mp4"));
+        videoView.setVideoURI(Uri.parse(movieInfo.getString("url")));
 
-//        videoView.start();
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                //mock data or error
-                if (playStart == -1) {
-                    mp.seekTo(1500);
+
+                int playStartMecs = getPlayStartMecs();
+
+                if (playStartMecs == -1) {
+                    Toast.makeText(ResultActivity.this,
+                            "error start time !", Toast.LENGTH_SHORT).show();
                 } else {
-                    mp.seekTo(playStart);
+                    mp.seekTo(playStartMecs);
                 }
             }
         });
@@ -48,18 +54,24 @@ public class ResultActivity extends ActionBarActivity {
 
     }
 
-    private int getPlayStart() {
+    private void init() {
         Intent intent = getIntent();
-        if (intent == null) return -1;
 
         Bundle bundle = intent.getExtras();
         HashMap<String, String> item =
                 (HashMap<String, String>) bundle.getSerializable("data");
 
-        String timeStart = item.get("timeStart");
-        return Utils.convertTimeString(timeStart);
+        timeStart = item.get("timeStart");
+        timeEnd = item.get("itemEnd");
+
+        String filename = item.get("filename");
+        movieInfo = Utils.getMovieInfo(filename);
     }
 
+    private int getPlayStartMecs() {
+        return Utils.convertTimeString(timeStart) +
+                ((int) movieInfo.getDouble("offset") * 1000);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
